@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tasks_app_acl/models/Task.dart';
+import 'package:tasks_app_acl/utils/TaskState.dart';
 
 class TaskProvider extends ChangeNotifier {
   late final Database _db;
+  final List<Task> _tasks;
 
-  TaskProvider() {
+  TaskProvider() : _tasks = [] {
     _openDB();
   }
 
@@ -24,28 +26,43 @@ class TaskProvider extends ChangeNotifier {
                             );""");
       },
       onOpen: (Database db) async {
-        print("Database opened!");
+        final tasks = await db.query('tasks');
+        tasks.forEach((task) {
+          _tasks.add(
+            Task(
+              title: task['title'].toString(),
+              description: task['description'].toString(),
+            ),
+          );
+        });
         notifyListeners();
       },
     );
   }
 
   List<Task> getTasks() {
-    return [
-      Task(title: 'Test task', description: 'This is a test task'),
-    ];
+    return _tasks;
   }
 
   Future<Task> createTask(String title, String description) async {
-    // var task = await _db!.insert(
-    //   'tasks',
-    //   {
-    //     title: title,
-    //     description: description,
-    //   },
-    // );
+    await _db.transaction(
+      (txn) async {
+        txn.insert(
+          'tasks',
+          {
+            'title': title,
+            'description': description,
+            'state': TaskState.TO_DO,
+          },
+        );
+      },
+    );
 
-    // print(task);
-    return Task(title: title, description: description);
+    final task = Task(title: title, description: description);
+    _tasks.add(task);
+
+    notifyListeners();
+
+    return task;
   }
 }
