@@ -17,16 +17,34 @@ class Home extends StatelessWidget {
       bottom: TabBar(
         tabs: [
           Tab(
-            icon: Icon(Icons.watch_later),
-            text: "To do",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.watch_later),
+                Padding(padding: EdgeInsets.all(2.0)),
+                Text("To do"),
+              ],
+            ),
           ),
           Tab(
-            icon: Icon(Icons.engineering),
-            text: "In progress",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.engineering),
+                Padding(padding: EdgeInsets.all(1.0)),
+                Text("In progress"),
+              ],
+            ),
           ),
           Tab(
-            icon: Icon(Icons.check),
-            text: "Done",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.check),
+                Padding(padding: EdgeInsets.all(2.0)),
+                Text("Done"),
+              ],
+            ),
           ),
         ],
       ),
