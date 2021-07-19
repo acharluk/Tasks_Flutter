@@ -6,5 +6,5 @@ class Task {
   int state;
 
   Task({required this.title, required this.description})
-      : this.state = TaskState.TODO;
+      : this.state = TaskState.TO_DO;
 }

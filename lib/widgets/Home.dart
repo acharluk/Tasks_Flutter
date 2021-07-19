@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_app_acl/utils/TaskState.dart';
+import 'package:tasks_app_acl/widgets/TaskList.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,9 +32,9 @@ class Home extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Text("To do"),
-              Text("In progress"),
-              Text("Done"),
+              TaskList(TaskState.TO_DO),
+              TaskList(TaskState.IN_PROGRESS),
+              TaskList(TaskState.DONE),
             ],
           ),
         ),
