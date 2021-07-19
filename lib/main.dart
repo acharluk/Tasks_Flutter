@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'db/TaskProvider.dart';
 import 'widgets/Home.dart';
 
 void main() {
@@ -7,6 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final TaskProvider taskProvider = new TaskProvider();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: Home(taskProvider),
     );
   }
 }
