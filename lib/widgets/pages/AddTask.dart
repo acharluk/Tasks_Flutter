@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:tasks_app_acl/db/TaskProvider.dart';
+import 'package:tasks_app_acl/models/Task.dart';
 
 class AddTask extends StatefulWidget {
-  AddTask({Key? key}) : super(key: key);
+  AddTask();
 
   @override
   _AddTaskState createState() => _AddTaskState();
@@ -77,7 +80,14 @@ class _AddTaskState extends State<AddTask> {
   FloatingActionButton _buildFloatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        // TODO: Save task to db
+        String title = titleTextController.text;
+        String description = descriptionTextController.text;
+
+        Provider.of<TaskProvider>(context, listen: false)
+            .createTask(title, description)
+            .then((Task value) =>
+                print(value.title + " :: " + value.description));
+
         Navigator.pop(context);
       },
       child: Icon(FontAwesome5.check),

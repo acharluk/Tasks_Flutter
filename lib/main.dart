@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'db/TaskProvider.dart';
 import 'widgets/pages/Home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TaskProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  final TaskProvider taskProvider = new TaskProvider();
+  // final TaskProvider taskProvider = TaskProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      home: Home(taskProvider),
+      home: Home(),
     );
   }
 }

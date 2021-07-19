@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:tasks_app_acl/db/TaskProvider.dart';
 import 'package:tasks_app_acl/utils/TaskState.dart';
+import 'package:tasks_app_acl/widgets/TaskList.dart';
 import 'package:tasks_app_acl/widgets/pages/AddTask.dart';
 import 'package:tasks_app_acl/widgets/pages/Settings.dart';
-import 'package:tasks_app_acl/widgets/TaskList.dart';
 import 'package:tasks_app_acl/widgets/partials/buildDrawer.dart';
 
 class Home extends StatelessWidget {
-  const Home(this._taskProvider);
-
-  final TaskProvider _taskProvider;
+  const Home();
 
   AppBar buildAppBar(BuildContext context) {
+    precacheImage(AssetImage('resources/drawer_header.jpg'), context);
+
     return AppBar(
       title: Text("Tasks"),
       bottom: TabBar(
@@ -55,9 +54,9 @@ class Home extends StatelessWidget {
   TabBarView buildBody() {
     return TabBarView(
       children: [
-        TaskList(TaskState.TO_DO, _taskProvider),
-        TaskList(TaskState.IN_PROGRESS, _taskProvider),
-        TaskList(TaskState.DONE, _taskProvider),
+        TaskList(TaskState.TO_DO),
+        TaskList(TaskState.IN_PROGRESS),
+        TaskList(TaskState.DONE),
       ],
     );
   }
