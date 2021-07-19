@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'db/TaskProvider.dart';
-import 'widgets/Home.dart';
+import 'widgets/pages/Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tasks',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.deepPurple,
+        accentColor: Colors.amberAccent,
+        brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
       home: Home(taskProvider),

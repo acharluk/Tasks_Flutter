@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_app_acl/db/TaskProvider.dart';
 import 'package:tasks_app_acl/utils/TaskState.dart';
+import 'package:tasks_app_acl/widgets/pages/AddTask.dart';
+import 'package:tasks_app_acl/widgets/pages/Settings.dart';
 import 'package:tasks_app_acl/widgets/TaskList.dart';
 import 'package:tasks_app_acl/widgets/partials/buildDrawer.dart';
 
@@ -9,7 +11,7 @@ class Home extends StatelessWidget {
 
   final TaskProvider _taskProvider;
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
       title: Text("Tasks"),
       bottom: TabBar(
@@ -28,6 +30,24 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
+      actions: [
+        Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Settings(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.settings,
+                size: 26.0,
+              ),
+            )),
+      ],
     );
   }
 
@@ -41,10 +61,15 @@ class Home extends StatelessWidget {
     );
   }
 
-  FloatingActionButton buildFloatingActionButton() {
+  FloatingActionButton buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        // Add task view
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddTask(),
+          ),
+        );
       },
       child: Icon(Icons.add),
       tooltip: "New task",
@@ -57,9 +82,9 @@ class Home extends StatelessWidget {
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: buildAppBar(),
+          appBar: buildAppBar(context),
           body: buildBody(),
-          floatingActionButton: buildFloatingActionButton(),
+          floatingActionButton: buildFloatingActionButton(context),
           drawer: buildDrawer(),
         ),
       ),
