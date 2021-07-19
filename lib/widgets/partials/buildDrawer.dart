@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 DrawerHeader _buildDrawerHeader() {

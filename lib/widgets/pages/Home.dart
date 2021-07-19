@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:tasks_app_acl/db/TaskProvider.dart';
 import 'package:tasks_app_acl/utils/TaskState.dart';
 import 'package:tasks_app_acl/widgets/pages/AddTask.dart';
@@ -71,7 +72,7 @@ class Home extends StatelessWidget {
           ),
         );
       },
-      child: Icon(Icons.add),
+      child: Icon(FontAwesome5.plus),
       tooltip: "New task",
     );
   }
