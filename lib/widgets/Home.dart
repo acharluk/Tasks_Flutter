@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasks_app_acl/db/TaskProvider.dart';
 import 'package:tasks_app_acl/utils/TaskState.dart';
 import 'package:tasks_app_acl/widgets/TaskList.dart';
+import 'package:tasks_app_acl/widgets/partials/buildDrawer.dart';
 
 class Home extends StatelessWidget {
   const Home(this._taskProvider);
@@ -40,6 +41,16 @@ class Home extends StatelessWidget {
     );
   }
 
+  FloatingActionButton buildFloatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        // Add task view
+      },
+      child: Icon(Icons.add),
+      tooltip: "New task",
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,6 +59,8 @@ class Home extends StatelessWidget {
         child: Scaffold(
           appBar: buildAppBar(),
           body: buildBody(),
+          floatingActionButton: buildFloatingActionButton(),
+          drawer: buildDrawer(),
         ),
       ),
     );
