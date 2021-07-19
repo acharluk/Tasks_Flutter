@@ -40,8 +40,12 @@ class TaskProvider extends ChangeNotifier {
     );
   }
 
-  List<Task> getTasks() {
-    return _tasks;
+  List<Task> getTasks({int? state}) {
+    if (state == null) {
+      return _tasks;
+    }
+
+    return _tasks.where((element) => element.state == state).toList();
   }
 
   Future<Task> createTask(String title, String description) async {

@@ -10,11 +10,13 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TaskProvider>(
       builder: (context, taskList, child) {
+        final tasks = taskList.getTasks(state: state);
+
         return ListView.builder(
-          itemCount: taskList.getTasks().length,
+          itemCount: tasks.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(taskList.getTasks()[index].title),
+              title: Text(tasks[index].title),
               onTap: () {
                 print(index);
               },
