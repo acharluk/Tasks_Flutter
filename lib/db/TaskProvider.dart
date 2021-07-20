@@ -26,15 +26,27 @@ class TaskProvider extends ChangeNotifier {
                             );""");
       },
       onOpen: (Database db) async {
-        final tasks = await db.query('tasks');
-        tasks.forEach((task) {
-          _tasks.add(
-            Task(
-              title: task['title'].toString(),
-              description: task['description'].toString(),
+        List<Map> tasks = await db.query(
+          'tasks',
+          columns: [
+            'id',
+            'title',
+            'description',
+            'state',
+          ],
+        );
+
+        _tasks.addAll(
+          tasks.map(
+            (t) => Task(
+              id: t['id'],
+              title: t['title'],
+              description: t['description'],
+              state: t['state'],
             ),
-          );
-        });
+          ),
+        );
+
         notifyListeners();
       },
     );
@@ -49,9 +61,9 @@ class TaskProvider extends ChangeNotifier {
   }
 
   Future<Task> createTask(String title, String description) async {
-    await _db.transaction(
+    int id = await _db.transaction(
       (txn) async {
-        txn.insert(
+        int id = await txn.insert(
           'tasks',
           {
             'title': title,
@@ -59,10 +71,11 @@ class TaskProvider extends ChangeNotifier {
             'state': TaskState.TO_DO,
           },
         );
+        return id;
       },
     );
 
-    final task = Task(title: title, description: description);
+    final task = Task(id: id, title: title, description: description);
     _tasks.add(task);
 
     notifyListeners();
@@ -76,9 +89,9 @@ class TaskProvider extends ChangeNotifier {
       {
         'state': ++task.state,
       },
-      where: 'title = ?',
+      where: 'id = ?',
       whereArgs: [
-        task.title,
+        task.id,
       ],
     );
 
@@ -91,9 +104,9 @@ class TaskProvider extends ChangeNotifier {
       {
         'state': --task.state,
       },
-      where: 'title = ?',
+      where: 'id = ?',
       whereArgs: [
-        task.title,
+        task.id,
       ],
     );
 
