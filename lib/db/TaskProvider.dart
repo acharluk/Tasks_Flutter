@@ -69,4 +69,30 @@ class TaskProvider extends ChangeNotifier {
 
     return task;
   }
+
+  Future<void> moveToNextStep(Task task) async {
+    switch (task.state) {
+      case TaskState.TO_DO:
+      case TaskState.IN_PROGRESS:
+        await _db.update(
+          'tasks',
+          {
+            'state': ++task.state,
+          },
+          where: 'title = ?',
+          whereArgs: [
+            task.title,
+          ],
+        );
+        break;
+      case TaskState.DONE:
+        await delete(task);
+    }
+
+    // print(getTasks());
+
+    notifyListeners();
+  }
+
+  Future<void> delete(Task task) async {}
 }

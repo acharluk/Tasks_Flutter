@@ -1,6 +1,7 @@
 import 'package:tasks_app_acl/utils/TaskState.dart';
 
 class Task {
+  // TODO: Add database id as property
   String title;
   String description;
   int state;
