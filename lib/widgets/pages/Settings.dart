@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_app_acl/widgets/partials/settings/buildDeleteDatabaseButton.dart';
+import 'package:tasks_app_acl/widgets/partials/settings/buildExportDatabaseButton.dart';
+import 'package:tasks_app_acl/widgets/partials/settings/buildImportDatabaseButton.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -20,18 +23,9 @@ class Settings extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(Icons.warning),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text("Delete database"),
-                  )
-                ],
-              ),
-              onTap: () {},
-            ),
+            buildExportDatabaseButton(context),
+            buildImportDatabaseButton(context),
+            buildDeleteDatabaseButton(context),
           ],
         ),
       ),

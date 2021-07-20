@@ -52,6 +52,13 @@ class TaskProvider extends ChangeNotifier {
     );
   }
 
+  Future<void> reload() async {
+    await _db.close();
+    await _openDB();
+
+    notifyListeners();
+  }
+
   List<Task> getTasks({int? state}) {
     if (state == null) {
       return _tasks;
@@ -114,7 +121,7 @@ class TaskProvider extends ChangeNotifier {
   }
 
   Future<void> delete(Task task) async {
-    _db.delete(
+    await _db.delete(
       'tasks',
       where: 'title = ?',
       whereArgs: [
@@ -123,6 +130,14 @@ class TaskProvider extends ChangeNotifier {
     );
 
     _tasks.remove(task);
+
+    notifyListeners();
+  }
+
+  Future<void> deleteAll() async {
+    await _db.delete('tasks');
+
+    _tasks.clear();
 
     notifyListeners();
   }
