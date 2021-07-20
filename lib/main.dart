@@ -14,8 +14,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // final TaskProvider taskProvider = TaskProvider();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

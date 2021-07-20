@@ -14,6 +14,7 @@ class Home extends StatelessWidget {
 
     return AppBar(
       title: Text("Tasks"),
+      elevation: 15,
       bottom: TabBar(
         tabs: [
           Tab(
