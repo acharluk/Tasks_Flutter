@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasks_app_acl/db/TaskProvider.dart';
+import 'package:tasks_app_acl/widgets/partials/buildTaskPopup.dart';
 
 class TaskList extends StatelessWidget {
   const TaskList(this.state);
@@ -18,7 +19,12 @@ class TaskList extends StatelessWidget {
             return ListTile(
               title: Text(tasks[index].title),
               onTap: () {
-                print(index);
+                showDialog(
+                  context: context,
+                  builder: (builder) {
+                    return buildTaskPopup(context, tasks[index]);
+                  },
+                );
               },
             );
           },
