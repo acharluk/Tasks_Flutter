@@ -8,6 +8,8 @@ import 'package:tasks_app_acl/utils/TaskState.dart';
 SimpleDialog buildTaskPopup(BuildContext context, Task task) {
   String nextStep =
       task.state == TaskState.TO_DO ? "Move to in progress" : "Move to done";
+  String previousStep =
+      task.state == TaskState.DONE ? "Move to in progress" : "Move to to do";
 
   return SimpleDialog(
     title: Text(task.title),
@@ -16,24 +18,46 @@ SimpleDialog buildTaskPopup(BuildContext context, Task task) {
         padding: EdgeInsets.all(26.0),
         child: Text(task.description),
       ),
-      SimpleDialogOption(
-        onPressed: () async {
-          await Provider.of<TaskProvider>(
-            context,
-            listen: false,
-          ).moveToNextStep(task);
-          Navigator.pop(context);
-        },
-        child: Row(
-          children: [
-            Icon(FontAwesome5.arrow_alt_circle_right),
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Text(nextStep),
+      task.state <= TaskState.IN_PROGRESS
+          ? SimpleDialogOption(
+              onPressed: () async {
+                await Provider.of<TaskProvider>(
+                  context,
+                  listen: false,
+                ).moveToNextStep(task);
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: [
+                  Icon(FontAwesome5.arrow_alt_circle_right),
+                  Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(nextStep),
+                  )
+                ],
+              ),
             )
-          ],
-        ),
-      ),
+          : Container(),
+      task.state >= TaskState.IN_PROGRESS
+          ? SimpleDialogOption(
+              onPressed: () async {
+                await Provider.of<TaskProvider>(
+                  context,
+                  listen: false,
+                ).moveToPreviousStep(task);
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: [
+                  Icon(FontAwesome5.arrow_alt_circle_left),
+                  Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(previousStep),
+                  )
+                ],
+              ),
+            )
+          : Container(),
       SimpleDialogOption(
         onPressed: () {
           Provider.of<TaskProvider>(
