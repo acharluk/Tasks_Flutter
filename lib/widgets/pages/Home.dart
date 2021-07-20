@@ -21,8 +21,8 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.watch_later),
-                Padding(padding: EdgeInsets.all(2.0)),
+                Icon(FontAwesome5.book),
+                Padding(padding: EdgeInsets.all(4.0)),
                 Text("To do"),
               ],
             ),
@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.engineering),
+                Icon(FontAwesome5.pen_nib),
                 Padding(padding: EdgeInsets.all(1.0)),
                 Text("In progress"),
               ],
@@ -41,8 +41,8 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.check),
-                Padding(padding: EdgeInsets.all(2.0)),
+                Icon(FontAwesome5.check_circle),
+                Padding(padding: EdgeInsets.all(4.0)),
                 Text("Done"),
               ],
             ),
@@ -62,7 +62,7 @@ class Home extends StatelessWidget {
                 );
               },
               child: Icon(
-                Icons.settings,
+                FontAwesome5.wrench,
                 size: 26.0,
               ),
             )),
