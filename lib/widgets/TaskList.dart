@@ -16,17 +16,45 @@ class TaskList extends StatelessWidget {
         return ListView.builder(
           itemCount: tasks.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(tasks[index].title),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (builder) {
-                    return buildTaskPopup(context, tasks[index]);
-                  },
-                );
-              },
-            );
+            return GestureDetector(
+                onLongPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (builder) {
+                      return buildTaskPopup(context, tasks[index]);
+                    },
+                  );
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  elevation: 25,
+                  margin: EdgeInsets.all(20),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ExpansionTile(
+                      title: Text(tasks[index].title),
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(tasks[index].title),
+                        ),
+                      ],
+                    ),
+                  ),
+                ));
+            // return ListTile(
+            //   title: Text(tasks[index].title),
+            //   onTap: () {
+            //     showDialog(
+            //       context: context,
+            //       builder: (builder) {
+            //         return buildTaskPopup(context, tasks[index]);
+            //       },
+            //     );
+            //   },
+            // );
           },
         );
       },

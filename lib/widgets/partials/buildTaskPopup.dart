@@ -14,10 +14,6 @@ SimpleDialog buildTaskPopup(BuildContext context, Task task) {
   return SimpleDialog(
     title: Text(task.title),
     children: [
-      Padding(
-        padding: EdgeInsets.all(26.0),
-        child: Text(task.description),
-      ),
       task.state <= TaskState.IN_PROGRESS
           ? SimpleDialogOption(
               onPressed: () async {
